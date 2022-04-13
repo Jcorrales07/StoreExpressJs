@@ -1,0 +1,47 @@
+Okay mira, que significa SRP es
+
+"Separacion De Resposabilidades" o "Single Resposability Principle"
+
+Y trata sobre separar cada endpoint, como por ejemplo
+los endpoints de products en un archivo
+los de los usuarios en otro archivo y los demas
+endpoints en su respectivo archivo para que se pueda
+hacer modular
+
+Para exportar el modulo, tendriamos que poner todos nuestros
+endpoints relacionados y al final del archivo poner
+
+* module.exports = router
+
+Asi exportamos el router del archivo individual
+
+Para obtenerlo en nuestro archivo que junta todos los routers
+seria:
+
+* const usersRouter = require('Nombre Del Archivo del Router')
+
+-> recomendable que para los archivos de routers ponerles Router al final
+del nombre del archivo, tipo: usersRouter.js
+
+algo interesante es que en cada archivo tengo que usar
+la siguiente funcion: 'express.Router()'
+
+y pues para lo que sirve es para poder enrutar los endpoints
+
+pero los endpoints de un archivo irian de esta forma
+
+* router.get('/', (req, res) => {...})
+el / signifca que seria el 'home' por asi decirlo de
+products, antes se miraba asi
+
+* app.get('/products', (req, res) => {...})
+pero como en otro archivo en donde haremos una funcion que se miraria asi
+
+* function routerApi(app) {
+  app.use('users', usersRouter)
+  //Otros Routers aca...
+}
+
+Y esta funcion 'routerApi' va a enroutar todo para que sea funcional
+
+[!] La funcion routerApi tambien se exporta como modulo
