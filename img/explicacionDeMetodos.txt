@@ -1,0 +1,33 @@
+RESTful por sus siglas: Representational State Transder
+
+Es una conveccion que se refiere a servicios web por
+protocolo metodos HTTP
+
+esos metodos son:
+
+GET: Obtener informacion de la base de datos
+
+PUT: Modificar/Actualizar toda la informacion de algo
+    (modificacion general)
+
+PATCH: funciona igual que PUT pero
+      con la diferencia de mandar la info
+      cosas en especifico
+    (modificacion especifica)
+
+POST: Es para crear algo nuevo
+
+DELETE: es para eliminar
+
+Con estos metodos se puede hacer un === |> CRUD <| ===
+
+** Ver las imagenes para saber que pedo **
+
+
+
+REGLA IMPORTANTE PARA LOS END POINTS
+//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//
+Una regla importante es que las rutas/endpoints que esten de manera
+especifica (absoluta) tienen que ir primero que las que son dinamicas
+(osea, las que se les pasa un parametro para buscar algo en especifico)
+por que si no no funciona
