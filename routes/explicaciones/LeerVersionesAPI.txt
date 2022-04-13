@@ -1,0 +1,13 @@
+Bueno mira, pueda ser que en dado caso
+se ocupen versiones para hacer cosas diferentes
+con la API.
+
+Aca un ejemplo:
+
+`
+  api.example.com/api/v1/users/
+  api.example.com/api/v1/tasks/
+  api.example.com/api/v1/customers/
+`
+
+No entiendo mucho por ahora jsjsjs

@@ -30,7 +30,6 @@ router.get('/:userId', (req, res) => {
     { id: 2, name: 'Joe', secondName: 'Corrales', username: 'Jcorrales07' },
   ];
 
-
   res.json({
     user_id: userId,
     name: 'Karol',
