@@ -19,21 +19,20 @@ router.get('/:productId', (req, res) => {
   const { productId } = req.params;
   const product = service.findOne(productId);
 
-  if(product) {
+  if (product) {
     res.status(200).json(product);
   } else {
-    res.status(404).send(`<h3>Product not found</h3>`)
+    res.status(404).send(`<h3>Product not found</h3>`);
   }
-
 });
 
 //Uso del metodo POST
 router.post('/', (req, res) => {
   const body = req.body;
-  res.json({
-    message: 'created',
-    data: body,
-  });
+
+  const newProduct = service.create(body);
+
+  res.json(newProduct);
 });
 
 //Uso del metodo patch para poder actualizar algo parcialmente
@@ -41,20 +40,16 @@ router.patch('/:id', (req, res) => {
   const { id } = req.params;
   const body = req.body;
 
-  res.json({
-    message: 'update',
-    data: body,
-    id,
-  });
+  const upProduct = service.update(id, body);
+
+  res.json(upProduct);
 });
 
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
+  const productDeleted = service.delete(id)
 
-  res.json({
-    message: 'deleted',
-    id,
-  });
+  res.json(productDeleted)
 });
 
 // el router de products se hace un modulo exportable
