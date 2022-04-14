@@ -1,9 +1,11 @@
 const express = require('express')
+const UsersService = require('./../services/usersService')
 
 const router = express.Router()
+const service = new UsersService()
 
 router.get('/', (req, res) => {
-  const { limit, offset } = req.query;
+  // const { limit, offset } = req.query;
   // if (limit && offset) {
   //   res.json({
   //     limit,
@@ -13,29 +15,21 @@ router.get('/', (req, res) => {
   //   res.send('No hay parametros');
   // }
 
-  res.json([
-    { name: 'Karol', secondName: 'Mejia', username: 'Karol777' },
-    { name: 'Emilio', secondName: 'Larach', username: 'EJLB' },
-    { name: 'Joe', secondName: 'Corrales', username: 'Jcorrales07' },
-  ]);
+  const users = service.find()
+  res.json(users)
+
 });
 
 //ruta de usuario especifico
 router.get('/:userId', (req, res) => {
   const { userId } = req.params;
+  const user = service.findOne(userId);
 
-  const users = [
-    { id: 0, name: 'Karol', secondName: 'Mejia', username: 'Karol777' },
-    { id: 1, name: 'Emilio', secondName: 'Larach', username: 'EJLB' },
-    { id: 2, name: 'Joe', secondName: 'Corrales', username: 'Jcorrales07' },
-  ];
-
-  res.json({
-    user_id: userId,
-    name: 'Karol',
-    secondName: 'Mejia',
-    username: 'Karol777',
-  });
+  if (user) {
+    res.status(200).json(user);
+  } else {
+    res.status(404).send(`<h3 style=\"color: rebeccapurple\">Cagaste wachin</h3>`)
+  }
 });
 
 router.post('/', (req, res) => {

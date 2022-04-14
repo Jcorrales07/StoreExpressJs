@@ -1,25 +1,14 @@
 const express = require('express');
-const faker = require('faker');
+const ProductsService = require('../services/productsService');
 
-const router = express.Router()
+const router = express.Router();
+const service = new ProductsService();
 
 //ruta de products
 router.get('/', (req, res) => {
-  const { size } = req.query;
-  const limit = size || 10;
-  const products = [];
-  for (let i = 0; i < limit; i++) {
-    products.push({
-      id: i,
-      name: faker.commerce.productName(),
-      price: parseInt(faker.commerce.price(), 10),
-      image: faker.image.imageUrl(),
-    });
-  }
-
+  const products = service.find();
   res.json(products);
 });
-
 
 router.get('/filter', (req, res) => {
   res.send('Yo soy un filter');
@@ -28,19 +17,14 @@ router.get('/filter', (req, res) => {
 // recibir parametros de un endpoint/ruta
 router.get('/:productId', (req, res) => {
   const { productId } = req.params;
+  const product = service.findOne(productId);
 
-  if(productId === '999') {
-    res.status(404).json({
-      message: '404 not found'
-    })
+  if(product) {
+    res.status(200).json(product);
+  } else {
+    res.status(404).send(`<h3>Product not found</h3>`)
   }
 
-
-  res.json({
-    productId,
-    name: 'Product 2',
-    price: 2000,
-  });
 });
 
 //Uso del metodo POST
@@ -48,31 +32,30 @@ router.post('/', (req, res) => {
   const body = req.body;
   res.json({
     message: 'created',
-    data: body
-  })
-})
+    data: body,
+  });
+});
 
 //Uso del metodo patch para poder actualizar algo parcialmente
 router.patch('/:id', (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
   const body = req.body;
 
   res.json({
     message: 'update',
     data: body,
     id,
-  })
-})
+  });
+});
 
 router.delete('/:id', (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
 
   res.json({
     message: 'deleted',
     id,
-  })
-})
-
+  });
+});
 
 // el router de products se hace un modulo exportable
 module.exports = router;
