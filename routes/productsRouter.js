@@ -28,12 +28,51 @@ router.get('/filter', (req, res) => {
 // recibir parametros de un endpoint/ruta
 router.get('/:productId', (req, res) => {
   const { productId } = req.params;
+
+  if(productId === '999') {
+    res.status(404).json({
+      message: '404 not found'
+    })
+  }
+
+
   res.json({
     productId,
     name: 'Product 2',
     price: 2000,
   });
 });
+
+//Uso del metodo POST
+router.post('/', (req, res) => {
+  const body = req.body;
+  res.json({
+    message: 'created',
+    data: body
+  })
+})
+
+//Uso del metodo patch para poder actualizar algo parcialmente
+router.patch('/:id', (req, res) => {
+  const { id } = req.params
+  const body = req.body;
+
+  res.json({
+    message: 'update',
+    data: body,
+    id,
+  })
+})
+
+router.delete('/:id', (req, res) => {
+  const { id } = req.params
+
+  res.json({
+    message: 'deleted',
+    id,
+  })
+})
+
 
 // el router de products se hace un modulo exportable
 module.exports = router;

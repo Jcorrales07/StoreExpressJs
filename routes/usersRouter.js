@@ -4,14 +4,14 @@ const router = express.Router()
 
 router.get('/', (req, res) => {
   const { limit, offset } = req.query;
-  if (limit && offset) {
-    res.json({
-      limit,
-      offset,
-    });
-  } else {
-    res.send('No hay parametros');
-  }
+  // if (limit && offset) {
+  //   res.json({
+  //     limit,
+  //     offset,
+  //   });
+  // } else {
+  //   res.send('No hay parametros');
+  // }
 
   res.json([
     { name: 'Karol', secondName: 'Mejia', username: 'Karol777' },
@@ -38,10 +38,33 @@ router.get('/:userId', (req, res) => {
   });
 });
 
-// para editar un perfil
-router.get('/:userId/edit', (req, res) => {
-  const { userId } = req.params;
-  res.send('Editar cositas de tu perfil');
-});
+router.post('/', (req, res) => {
+  const body = req.body
+  res.json({
+    message: 'created',
+    data: body
+  })
+})
+
+
+router.patch('/:id', (req, res) => {
+  const { id } = req.params
+  const body = req.body
+
+  res.json({
+    message: 'updated',
+    data: body,
+    id,
+  })
+})
+
+router.delete('/:id', (req, res) => {
+  const { id } = req.params
+
+  res.json({
+    message: 'deleted',
+    id,
+  })
+})
 
 module.exports = router

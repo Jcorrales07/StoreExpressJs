@@ -18,4 +18,33 @@ router.get('/:orderId', (req, res) => {
   });
 });
 
+router.post('/', (req, res) => {
+  const body = req.params;
+
+  res.json({
+    message: 'created',
+    data: body,
+  });
+});
+
+router.patch('/:id', (req, res) => {
+  const { id } = req.params;
+  const body = req.params;
+
+  res.json({
+    message: 'updated',
+    data: body,
+    id: id,
+  });
+});
+
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+
+  res.json({
+    message: 'deleted',
+    id,
+  })
+});
+
 module.exports = router;

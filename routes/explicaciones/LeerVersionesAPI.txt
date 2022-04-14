@@ -10,4 +10,36 @@ Aca un ejemplo:
   api.example.com/api/v1/customers/
 `
 
-No entiendo mucho por ahora jsjsjs
+//EJEMPLO
+
+//Bueno mira, tenemos es te ejemplo, y digamos que tenemos tres versiones
+//de la api pero ocupamos que no choquen entre si
+//entonces se tenes tus archivos con sus endpoints separados para cada version
+// como lo que esta abajo
+
+const homeRouter = require('./homeRouter');
+const productsRouter = require('./productsRouter');
+const usersRouter = require('./usersRouter');
+const categoriesRouter = require('./categoriesRouter');
+const ordersRouter = require('./ordersRouter');
+
+//Bueno para poder separarlo vas a hacer lo mismo que hiciste en los archivos
+//individuales... usar un router y enrutarlo par acada uno
+
+
+function routerApi(app) {
+  //==>
+  const router = require('express').Router();
+  app.use('/api/v1', router);
+  //==>
+
+  //==> y se conectan con el router especifico para esa version
+  router.use('/', homeRouter);
+  router.use('/products', productsRouter);
+  router.use('/users', usersRouter);
+  router.use('/categories', categoriesRouter);
+  router.use('/orders', ordersRouter);
+  //==>
+}
+
+module.exports = routerApi;
