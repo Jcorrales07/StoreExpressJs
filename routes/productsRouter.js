@@ -15,15 +15,20 @@ router.get('/filter', (req, res) => {
 });
 
 // recibir parametros de un endpoint/ruta
-router.get('/:productId', async (req, res) => {
-  const { productId } = req.params;
-  const product = await service.findOne(productId);
-
-  if (product) {
+router.get('/:productId', async (req, res, next) => {
+  try {
+    const { productId } = req.params;
+    const product = await service.findOne(productId);
     res.status(200).json(product);
-  } else {
-    res.status(404).send(`<h3>Product not found</h3>`);
+  } catch (error) {
+    next(error)
   }
+
+  // if (product) {
+  //   res.status(200).json(product);
+  // } else {
+  //   res.status(404).send(`<h3>Product not found</h3>`);
+  // }
 });
 
 //Uso del metodo POST

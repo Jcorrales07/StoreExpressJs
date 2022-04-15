@@ -1,0 +1,28 @@
+
+// MIDDLEWARES
+Estas son funciones que tienen acceso (req, res, next)
+al objeto request, response y a la funcion next que esta
+en el ciclo de peticiones y respuesta de la aplicacion
+
+La funcion next es una funcion que esta en el router de Express
+y cuando se invoca, el middleware que pasa del middleware actual
+
+Las funciones de middleware pueden realizar las siguientes tareas:
+
+* Ejecutar cualquier codigo
+* Realizar cambios en la solicitud y los objetos de respuesta
+* Finalizar el ciclo de solicitud/respuesta (req, res)
+* Invocar el siguiente middleware en la pila
+
+
+
+//Asi se miraria un Middleware
+
+function (req, res, next) {
+ if (something) {
+    res.send('end');
+  } else {
+    next();
+  }
+}
+
