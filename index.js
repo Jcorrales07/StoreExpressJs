@@ -32,6 +32,16 @@ const options = {
   },
 };
 
+router.get('/', (req, res) => {
+  res.status(201).send(`Bueno, hola JASDJASA yo se que esta no es la mejor interfaz de todas pero es legible 😎<br>
+    Bueno, contexto. esta seria la pagina de inicio o el 'Home Page', pero bueno no he hecho nada de eso por que me da hueva
+    si quieren acceder a otra rutas (endpoints) por ejemplo ver los usuario de la app, escriban en el buscador
+    obscure-springs-19379.herokuapp.com/api/v1/users y ahi les va salir los usuarios o si quieren ver los prroductos... van a poner
+    obscure-springs-19379.herokuapp.com/api/v1/products y asi...
+  `)
+})
+
+
 routerApi(app);
 //Implementacion de Middlewares de forma secuencial
 //tener cuidado como se ponen, por ejemplo si pones
